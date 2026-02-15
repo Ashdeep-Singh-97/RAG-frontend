@@ -14,6 +14,8 @@ export default function PdfPage() {
   const [loading, setLoading] = useState(false);
   const [isTyping, setIsTyping] = useState(false); // ✅ Typing indicator
 
+  const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:5000";
+
   async function uploadPdf() {
     if (!file) return alert("Select PDF first");
 
@@ -22,7 +24,7 @@ export default function PdfPage() {
 
     setLoading(true);
 
-    const res = await fetch("http://localhost:5001/api/pdf/upload", {
+    const res = await fetch(`${BASE_URL}/api/pdf/upload`, {
       method: "POST",
       body: formData,
     });
@@ -47,7 +49,7 @@ export default function PdfPage() {
     setMessages((prev) => [...prev, { role: "user", text: userMsg }]);
     setIsTyping(true); // ✅ Start typing
 
-    const res = await fetch("http://localhost:5001/api/chat", {
+    const res = await fetch(`${BASE_URL}/api/chat`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 
+const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:5000";
+
 export default function WebsitePage() {
   const [url, setUrl] = useState("");
   const [processed, setProcessed] = useState(false);
@@ -19,7 +21,7 @@ export default function WebsitePage() {
 
     setLoading(true);
 
-    const res = await fetch("http://localhost:5001/api/website/process", {
+    const res = await fetch(`${BASE_URL}/api/website/process`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ url }),
@@ -45,7 +47,7 @@ export default function WebsitePage() {
     setMessages((prev) => [...prev, { role: "user", text: userMsg }]);
     setIsTyping(true); // ✅ Start typing
 
-    const res = await fetch("http://localhost:5001/api/chat", {
+    const res = await fetch(`${BASE_URL}/api/chat`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -69,8 +71,8 @@ export default function WebsitePage() {
       <div className="w-full max-w-3xl">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-semibold">🌐 Website Chat</h1>
-          
-            <a href="/"
+
+          <a href="/"
             className="text-sm text-zinc-400 hover:text-white transition"
           >
             ← Back
@@ -110,11 +112,10 @@ export default function WebsitePage() {
                   {messages.map((m, i) => (
                     <div
                       key={i}
-                      className={`p-4 rounded-xl max-w-[80%] ${
-                        m.role === "user"
+                      className={`p-4 rounded-xl max-w-[80%] ${m.role === "user"
                           ? "ml-auto bg-white text-black"
                           : "mr-auto bg-zinc-800 text-white"
-                      }`}
+                        }`}
                     >
                       <p className="text-sm whitespace-pre-line">{m.text}</p>
                     </div>
