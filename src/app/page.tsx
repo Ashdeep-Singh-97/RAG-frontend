@@ -8,12 +8,12 @@ export default function HomePage() {
         </p>
 
         <div className="mt-8 grid gap-4">
-          <a
+          {/* <a
             href="/pdf"
             className="w-full rounded-xl bg-white text-black px-5 py-3 font-medium hover:bg-zinc-200 transition"
           >
             📄 PDF Chat
-          </a>
+          </a> */}
 
           <a
             href="/website"
