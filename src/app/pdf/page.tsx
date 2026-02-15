@@ -15,7 +15,7 @@ export default function PdfPage() {
   const [isTyping, setIsTyping] = useState(false); // ✅ Typing indicator
 
   const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:5000";
-
+console.log(process.env.NEXT_PUBLIC_BACKEND_URL)
   async function uploadPdf() {
     if (!file) return alert("Select PDF first");
 
